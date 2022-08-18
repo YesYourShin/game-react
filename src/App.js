@@ -1,16 +1,17 @@
 import './App.css';
+import Header from './Header';
+import { Route, Routes } from 'react-router-dom';
+import Home from './Home';
+import Game from './Game';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route path="/Game" element={<Game />} />
+      </Routes>
     </div>
   );
 }
