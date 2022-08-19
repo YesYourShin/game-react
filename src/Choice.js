@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Choice = ({ cards, correct }) => {
   const [choice, setChoice] = useState([]);
@@ -6,21 +6,43 @@ const Choice = ({ cards, correct }) => {
   for (const card of cards) {
     arr.push(card);
   }
-  console.log(arr);
+  // console.log(arr);
 
   const getRdArr = () => {
     const rdArr = [];
+    console.log(arr);
     for (let i = 0; i < 4; i++) {
-      console.log(arr.length);
+      // console.log(arr.length);
       const rdNum = Math.floor(Math.random() * arr.length);
+      // console.log(rdNum);
+
       rdArr.push(arr[rdNum]);
-      arr.splice(0, 1);
+      arr.splice(rdNum, 1);
     }
     setChoice(rdArr);
+    console.log(rdArr);
+    // console.log(choice);
   };
-  if (arr.length === 4) getRdArr();
+
+  const handleChoiceClick = () => {
+    console.log('click');
+  };
+
+  useEffect(() => {
+    if (arr.length === 4) {
+      getRdArr();
+    }
+  }, [correct]);
+
   return (
     <div className="Choice">
+      {choice.map(it => {
+        return (
+          <p key={it.id} onClick={handleChoiceClick}>
+            {it.title}
+          </p>
+        );
+      })}
       {/* <table>
         <tbody>
           <tr>
