@@ -24,8 +24,14 @@ const Choice = ({ cards, correct }) => {
     // console.log(choice);
   };
 
-  const handleChoiceClick = () => {
-    console.log('click');
+  const handleChoiceClick = id => {
+    if (id === correct.id) {
+      console.log(`correct title : ${correct.title}, id : ${correct.id}, 정답입니다.`);
+      return;
+    }
+
+    console.log('틀렸습니다');
+    // console.log(JSON.stringify(e.target));
   };
 
   useEffect(() => {
@@ -38,7 +44,7 @@ const Choice = ({ cards, correct }) => {
     <div className="Choice">
       {choice.map(it => {
         return (
-          <p key={it.id} onClick={handleChoiceClick}>
+          <p key={it.id} onClick={() => handleChoiceClick(it.id)}>
             {it.title}
           </p>
         );
