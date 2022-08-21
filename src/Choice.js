@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const Choice = ({ wrongCards, correctCard }) => {
+const Choice = ({ wrongCards, correctCard, setAnswer }) => {
   const [choice, setChoice] = useState([]);
   const arr = [correctCard];
   for (const card of wrongCards) {
@@ -27,6 +27,7 @@ const Choice = ({ wrongCards, correctCard }) => {
   const handleChoiceClick = id => {
     if (id === correctCard.id) {
       console.log(`correctCard title : ${correctCard.title}, id : ${correctCard.id}, 정답입니다.`);
+      setAnswer(id);
       return;
     }
 
@@ -49,18 +50,6 @@ const Choice = ({ wrongCards, correctCard }) => {
           </p>
         );
       })}
-      {/* <table>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>2</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>4</td>
-          </tr>
-        </tbody>
-      </table> */}
     </div>
   );
 };

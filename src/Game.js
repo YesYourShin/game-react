@@ -6,6 +6,7 @@ import Question from './Question';
 const Game = () => {
   const [correctCard, setCorrectCard] = useState();
   const [wrongCards, setWrongCards] = useState([]);
+  const [answer, setAnswer] = useState([]);
 
   const getData = async () => {
     const src = await axios.get('http://127.0.0.1:8000/play');
@@ -14,18 +15,19 @@ const Game = () => {
     //   return it
     // })
     setWrongCards(src.data.wrong);
+    console.log(answer);
   };
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [answer]);
 
   return (
     <div className="Game">
       <h2>Game</h2>
       <h2>효과를 보고 몬스터 이름을 맞추시오.</h2>
       <Question correctCard={correctCard} />
-      <Choice wrongCards={wrongCards} correctCard={correctCard} setCorrectCard={setCorrectCard} />
+      <Choice wrongCards={wrongCards} correctCard={correctCard} setAnswer={setAnswer} />
     </div>
   );
 };
