@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
-const Choice = ({ cards, correct }) => {
+const Choice = ({ wrongCards, correctCard }) => {
   const [choice, setChoice] = useState([]);
-  const arr = [correct];
-  for (const card of cards) {
+  const arr = [correctCard];
+  for (const card of wrongCards) {
     arr.push(card);
   }
   // console.log(arr);
@@ -25,8 +25,8 @@ const Choice = ({ cards, correct }) => {
   };
 
   const handleChoiceClick = id => {
-    if (id === correct.id) {
-      console.log(`correct title : ${correct.title}, id : ${correct.id}, 정답입니다.`);
+    if (id === correctCard.id) {
+      console.log(`correctCard title : ${correctCard.title}, id : ${correctCard.id}, 정답입니다.`);
       return;
     }
 
@@ -38,7 +38,7 @@ const Choice = ({ cards, correct }) => {
     if (arr.length === 4) {
       getRdArr();
     }
-  }, [correct]);
+  }, [correctCard]);
 
   return (
     <div className="Choice">
@@ -66,8 +66,8 @@ const Choice = ({ cards, correct }) => {
 };
 
 Choice.defaultProps = {
-  cards: [],
-  correct: [],
+  wrongCards: [],
+  correctCard: [],
 };
 
 export default Choice;
