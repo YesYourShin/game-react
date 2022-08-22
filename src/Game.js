@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import Choice from './Choice';
+import Progress from './Progress';
 import Question from './Question';
 
 const Game = () => {
@@ -30,6 +31,7 @@ const Game = () => {
   return (
     <div className="Game">
       <h2>Game</h2>
+      <Progress />
       <h2>효과를 보고 몬스터 이름을 맞추시오.</h2>
       <h2>맞춘 정답 수: {correctAnswerCount}</h2>
       <Question correctCard={correctCard} />
@@ -42,6 +44,7 @@ const Game = () => {
         correctAnswerCount={correctAnswerCount}
         setCorrectAnswerCount={setCorrectAnswerCount}
       />
+      <button>버튼</button>
     </div>
   );
 };
