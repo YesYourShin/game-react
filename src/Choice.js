@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
-const Choice = ({ wrongCards, correctCard, setAnswer, answerSheet, setAnswerSheet, correctAnswerCount, setCorrectAnswerCount }) => {
+const Choice = ({ wrongCards, correctCard, setAnswer, answerSheet, setAnswerSheet, correctAnswerCount, setCorrectAnswerCount, score, setScore }) => {
   const [choice, setChoice] = useState([]);
   const arr = [correctCard];
+  const qId = useRef(1);
+
   for (const card of wrongCards) {
     arr.push(card);
   }
@@ -29,17 +31,21 @@ const Choice = ({ wrongCards, correctCard, setAnswer, answerSheet, setAnswerShee
       // console.log(`correctCard title : ${correctCard.title}, id : ${correctCard.id}, 정답입니다.`);
 
       console.log('정답입니다');
-      setAnswer(true);
-      // 왜 여기서 에러나지?
-      // 배열에 저장한 객체를 앞에 추가하고 뒤에 새로운 객체를 추가하는 이런 게 아닌가?
-      setAnswerSheet([...answerSheet, { question: correctCard.card_text, choice: choice, myAnswer: title }]);
-      // setAnswerSheet(...answerSheet, 1);
       setCorrectAnswerCount(correctAnswerCount + 1);
-      return;
+      setScore(score + 1);
+    } else {
+      console.log('틀렸습니다');
+      setScore(score - 1);
     }
 
-    console.log('틀렸습니다');
     // console.log(JSON.stringify(e.target));
+    setAnswer(true);
+    // 왜 여기서 에러나지?
+    // 배열에 저장한 객체를 앞에 추가하고 뒤에 새로운 객체를 추가하는 이런 게 아닌가?
+    setAnswerSheet([...answerSheet, { id: qId.current++, question: correctCard.card_text, choice: choice, myChoice: title, correctAnswer: correctCard.title }]);
+    // setAnswerSheet(...answerSheet, 1);
+
+    return;
   };
 
   useEffect(() => {
@@ -52,9 +58,9 @@ const Choice = ({ wrongCards, correctCard, setAnswer, answerSheet, setAnswerShee
     <div className="Choice">
       {choice.map(it => {
         return (
-          <p key={it.id} onClick={() => handleChoiceClick(it.title, it.id)}>
+          <button key={it.id} id="choice" onClick={() => handleChoiceClick(it.title, it.id)}>
             {it.title}
-          </p>
+          </button>
         );
       })}
     </div>

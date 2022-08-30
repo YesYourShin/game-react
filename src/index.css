@@ -1,0 +1,10 @@
+button {
+  position: static;
+  border: 0;
+  outline: 0;
+}
+
+.Choice {
+  width: 200px;
+  margin: auto;
+}
